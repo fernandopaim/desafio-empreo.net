@@ -2,43 +2,17 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
         <q-toolbar-title>
-          Quasar App
+          <div class="text-logo" @click="confirm">
+            emprego<span>.</span>net
+          </div>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn dense flat icon="close" v-close-popup @click="confirm">
+          <q-tooltip>Sair</q-tooltip>
+        </q-btn>
       </q-toolbar>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -47,63 +21,55 @@
 </template>
 
 <script lang="ts">
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
 import { defineComponent, ref } from '@vue/composition-api'
 
 export default defineComponent({
   name: 'MainLayout',
-  components: { EssentialLink },
+  components: {},
   setup () {
     const leftDrawerOpen = ref(false)
-    const essentialLinks = ref(linksData)
 
-    return { leftDrawerOpen, essentialLinks }
+    return { leftDrawerOpen }
+  },
+  methods: {
+    confirm () {
+      this.$q.dialog({
+        title: 'Cancelar registro?',
+        message: 'Tem certeza de que deseja sair do cadastro?',
+        ok: {
+          label: 'Continuar cadastro',
+          push: true
+        },
+        cancel: {
+          label: 'Sair',
+          flat: true
+        },
+        persistent: true
+      }).onOk(() => {
+        // console.log('>>>> OK')
+      }).onCancel(() => {
+        // return this.$router.push('/recruiter')
+        window.location.href = 'https://uat.emprego.net/recruiter'
+      }).onDismiss(() => {
+        // console.log('I am triggered on both OK and Cancel')
+      })
+    }
   }
 })
 </script>
+
+<style lang="sass" scoped>
+  @import 'https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@600&display=swap'
+
+  .text-logo
+    display: inline-block
+    margin: 4px 4px 4px 24px
+    padding: 4px 0
+    font-family: 'Poppins', sans-serif
+    font-weight: 600
+    cursor: pointer
+
+    > span
+      font-family: 'Open Sans', sans-serif
+      font-size: 125%
+</style>
