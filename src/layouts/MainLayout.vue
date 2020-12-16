@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-toolbar-title>
           <div class="text-logo" @click="confirm">
-            emprego<span>.</span>net
+            quasar<span>.</span>prot
           </div>
         </q-toolbar-title>
 
@@ -48,8 +48,7 @@ export default defineComponent({
       }).onOk(() => {
         // console.log('>>>> OK')
       }).onCancel(() => {
-        // return this.$router.push('/recruiter')
-        window.location.href = 'https://uat.emprego.net/recruiter'
+        // return this.$router.push('/home')
       }).onDismiss(() => {
         // console.log('I am triggered on both OK and Cancel')
       })

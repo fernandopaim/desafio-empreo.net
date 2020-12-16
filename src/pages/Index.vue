@@ -1,19 +1,21 @@
 <template>
   <q-page class="row bg-grey-1">
-    <div class="left-bar desktop-only hidden-xs hidden-sm col-md-3 col-lg-2 body-height bg-secondary">
-      <h3 class="left-bar-title q-mb-xs text-primary">Cadastro recrutador</h3>
-      <q-stepper v-model="step" class="styled-stepper"
-        done-color="primary"
-        active-color="primary"
-        inactive-color="primary"
-        vertical animated flat>
-        <q-step :name="1" prefix="1" title="Dados pessoais"
-          caption="1 min" :done="step > 1" />
-        <q-step :name="2" prefix="2" title="Organização"
-          caption="1 min" :done="step > 2" />
-        <q-step :name="3" prefix="3" title="Detalhes da vaga"
-          caption="1 min" :done="step > 3" />
-      </q-stepper>
+    <div class="left-bar gt-sm col-md-4 col-lg-2 body-height bg-secondary">
+      <div class="q-px-lg">
+        <h3 class="left-bar-title q-mb-xs text-primary">Cadastro recrutador</h3>
+        <q-stepper v-model="step" class="styled-stepper"
+          done-color="primary"
+          active-color="primary"
+          inactive-color="primary"
+          vertical animated flat>
+          <q-step :name="1" prefix="1" title="Dados pessoais"
+            caption="1 min" :done="step > 1" />
+          <q-step :name="2" prefix="2" title="Organização"
+            caption="1 min" :done="step > 2" />
+          <q-step :name="3" prefix="3" title="Detalhes da vaga"
+            caption="1 min" :done="step > 3" />
+        </q-stepper>
+      </div>
     </div>
     <div class="col-sm-12 col-md-10 body-height">
 
@@ -60,8 +62,9 @@ export default defineComponent({
     height: calc(100vh - 55px)
 
   .left-bar
-    padding-left: 3vw
-    // max-width: max(16vw, 24em)
+    display: flex
+    flex-direction: column
+    align-items: center
     padding-top: 0.6em
 
   .left-bar-title

@@ -1,8 +1,8 @@
 {
-  "name": "desafio",
+  "name": "prototipo-quasar",
   "version": "0.0.1",
   "description": "A project frontend test",
-  "productName": "Emprego.net",
+  "productName": "Quasar",
   "author": "Fernando <fernandosilva1989@gmail.com>",
   "private": true,
   "scripts": {
